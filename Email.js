@@ -50,7 +50,7 @@ exports.emailing = function (event, context, callback) {
   };
 
   let putDynamoParams = {
-    TableName: process.env.DYNAMO_DB_NAME,
+    TableName: process.env.DynamodbName,
     Item: {
       id: { S: messageJson.email_address },
       ttl: { N: expTime }

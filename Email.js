@@ -15,7 +15,7 @@ exports.emailing = function (event, context, callback) {
     console.log("messageUrls  -> ", messageUrls);
   
     let emailBody = "Below Bills are due: \n\n";
-  for (var i = 0; i < msgUrls.length; i++) {
+  for (var i = 0; i < messageUrls.length; i++) {
     let link = messageUrls[i];
     emailBody += link + " \n";
   }

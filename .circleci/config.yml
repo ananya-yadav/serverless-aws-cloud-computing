@@ -15,11 +15,11 @@ jobs:
       - run:
           name: Zip file
           command: |
-            zip handler.zip handler.js
+            zip lambda_code.zip Email.js
       - run:
           name: LambdaFunction to S3 bucket upload
           command: |
-            aws s3 cp index.zip s3://${AWS_BUCKET_NAME}/handler.zip
+            aws s3 cp lambda_code.zip s3://${AWS_BUCKET_NAME}/lambda_code.zip
       - run: 
           name: Install less
           command: |
@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Update lambda_Function code
           command: |
-            aws lambda update-function-code --function-name EmailService --region us-east-1 --zip-file fileb://index.zip
+            aws lambda update-function-code --function-name ${LAMBDA_NAME} --region us-east-1 --zip-file fileb://lambda_code.zip
       
 workflows:
   version: 2

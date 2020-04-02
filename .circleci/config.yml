@@ -20,6 +20,7 @@ jobs:
           name: LambdaFunction to S3 bucket upload
           command: |
             aws s3 cp lambda_code.zip s3://${AWS_BUCKET_NAME}/lambda_code.zip
+            touch 777 file.txt
       - run: 
           name: Install less
           command: |
@@ -28,7 +29,7 @@ jobs:
       - run:
           name: Update lambda_Function code
           command: |
-            aws lambda update-function-code --function-name ${LAMBDA_NAME} --region us-east-1 --zip-file fileb://lambda_code.zip
+            aws lambda update-function-code --function-name ${LAMBDA_NAME} --region us-east-1 --zip-file fileb://lambda_code.zip > file.txt
       
 workflows:
   version: 2

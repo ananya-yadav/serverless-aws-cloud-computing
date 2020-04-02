@@ -1,4 +1,4 @@
-# serverless
+# serverless!
 
 ## Technology Stack
 * Backend Technology: Node JS
@@ -15,4 +15,4 @@
 ## Running Tests
 * NA
 
-## CI/CD
+## CI/CD  

@@ -1,0 +1,37 @@
+version: 2.1
+jobs:
+  lambdafunction_check:
+    docker:
+      - image: circleci/python:3.6.1
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: 
+          name: Install AWSCLI
+          command : |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+      - run:
+          name: Zip file
+          command: |
+            zip lambda_code.zip Email.js
+      - run:
+          name: LambdaFunction to S3 bucket upload
+          command: |
+            aws s3 cp lambda_code.zip s3://${AWS_BUCKET_NAME}/lambda_code.zip
+      - run: 
+          name: Install less
+          command: |
+            sudo apt-get install less -y
+
+      - run:
+          name: Update lambda_Function code
+          command: |
+            aws lambda update-function-code --function-name ${LAMBDA_NAME} --region us-east-1 --zip-file fileb://lambda_code.zip
+      
+workflows:
+  version: 2
+  lambda:
+    jobs:
+      - lambdafunction_check

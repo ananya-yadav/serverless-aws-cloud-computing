@@ -1,5 +1,5 @@
 const aws = require("aws-sdk");
-var ddb = new aws.DynamoDB({ apiVersion: "2012-08-10" });
+var myDyanamoDB = new aws.DynamoDB({ apiVersion: "2012-08-10" });
 aws.config.update({ region: "us-east-1" });
 exports.emailing = function (event, context, callback) {
     let message = event.Records[0].Sns.Message;
@@ -64,12 +64,12 @@ exports.emailing = function (event, context, callback) {
     },
   }
   console.log("queryDynamoParams"+ queryDynamoParams);
-  dynamoDB.getItem(queryDynamoParams, function (err, data) {
+  myDyanamoDB.getItem(queryDynamoParams, function (err, data) {
     if (err) console.log(err, err.stack); // an error occurred
     else {
       console.log("Dynamo DB data -> " + data);
       if (data.Item == null) {
-        dynamoDB.putItem(putDynamoParams, function (error, result) {
+        myDyanamoDB.putItem(putDynamoParams, function (error, result) {
           if (error) {
             console.log("Error in putting data " + error)
           }

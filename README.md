@@ -1,4 +1,4 @@
-# serverless!
+# serverless
 
 ## Technology Stack
 * Backend Technology: Node JS

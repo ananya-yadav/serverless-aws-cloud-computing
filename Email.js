@@ -11,7 +11,7 @@ exports.emailing = function (event, context, callback) {
     console.log(domain);
     console.log(dbName);
   
-    let messageUrls = messageJson.urls;
+    let messageUrls = messageJson.linksArray;
     console.log("messageUrls  -> ", messageUrls);
   
     let emailBody = "Below Bills are due: \n\n";
